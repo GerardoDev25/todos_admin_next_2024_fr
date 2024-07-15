@@ -14,6 +14,11 @@ export const NewTodo = () => {
     console.log(todo);
   };
 
+  const deleteCompleted = async () => {
+    await todosApi.deleteTodos();
+    router.refresh();
+  };
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (description.trim().length === 0) {
@@ -44,7 +49,7 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button
-        //TODO: onClick={ () => deleteCompleted() }
+        onClick={() => deleteCompleted()}
         type='button'
         className='flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all'
       >
