@@ -1,12 +1,29 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import {
+  IoCalendarClearOutline,
+  IoCheckboxOutline,
+  IoListOutline,
+} from 'react-icons/io5';
 import { CiLogout } from 'react-icons/ci';
 import { SidebarItem } from './SidebarItem';
 
-const sidebarItems = [
-  { name: 'Dashboard', url: '/dashboard/rest-todos', isActive: true },
-  { name: 'Categories', url: '/dashboard/categories' },
+const menuItems = [
+  {
+    title: 'Dashboard',
+    path: '/dashboard',
+    icon: <IoCalendarClearOutline />,
+  },
+  {
+    title: 'Rest TODOS',
+    path: '/dashboard/rest-todos',
+    icon: <IoCheckboxOutline />,
+  },
+  {
+    title: 'Server Actions',
+    path: '/dashboard/server-todos',
+    icon: <IoListOutline />,
+  },
 ];
 
 export const Sidebar = () => {
@@ -40,8 +57,8 @@ export const Sidebar = () => {
         </div>
 
         <ul className='space-y-2 tracking-wide mt-8'>
-          {sidebarItems.map((item, index) => (
-            <SidebarItem key={item.name + index} {...item} />
+          {menuItems.map((item) => (
+            <SidebarItem key={item.path} {...item} />
           ))}
         </ul>
       </div>

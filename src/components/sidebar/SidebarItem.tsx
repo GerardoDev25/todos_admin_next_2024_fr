@@ -1,23 +1,29 @@
+'use client';
 import Link from 'next/link';
-import { CiBookmarkCheck } from 'react-icons/ci';
+import { usePathname } from 'next/navigation';
 
 interface Props {
-  name: string;
-  url: string;
-  isActive?: boolean;
+  title: string;
+  path: string;
+  icon: React.ReactNode;
+  // isActive?: boolean;
 }
 
-export const SidebarItem = ({ name, isActive, url }: Props) => {
+export const SidebarItem = ({ title, path, icon }: Props) => {
+  const pathName = usePathname();
+
   return (
     <li>
       <Link
-        href={url}
-        className={`relative px-4 py-3 flex items-center space-x-4 rounded-xl ${
-          isActive && 'text-white bg-gradient-to-r from-sky-600 to-cyan-400'
-        }`}
+        href={path}
+        className={`relative px-4 py-3 flex items-center space-x-4 rounded-xl hover:bg-gradient-to-r hover:bg-sky-600 hover:text-white
+          ${
+            path === pathName &&
+            'text-white bg-gradient-to-r from-sky-600 to-cyan-400'
+          } `}
       >
-        <CiBookmarkCheck size={30} />
-        <span className='-mr-1 font-medium'>{name}</span>
+        {icon}
+        <span className='-mr-1 font-medium'>{title}</span>
       </Link>
     </li>
   );
