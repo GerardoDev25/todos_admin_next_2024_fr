@@ -1,2 +1,1 @@
-export { TodosGrid } from './TodosGrid';
-export { TodoItem } from './TodoItem';
+export * from './components/';
