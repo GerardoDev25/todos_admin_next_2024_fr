@@ -3,30 +3,32 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IoTrashOutline } from 'react-icons/io5';
 
-import * as todosApi from '../helpers/todo';
+// import * as todosApi from '../helpers/todo';
+import { addTodoAction, deleteTodosCompletedAction } from '../actions';
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('');
   const router = useRouter();
 
-  const createTodo = async () => {
-    const todo = await todosApi.createTodo(description);
-    console.log(todo);
-  };
+  // const createTodo = async () => {
+  //   const todo = await todosApi.createTodo(description);
+  //   console.log(todo);
+  // };
 
-  const deleteCompleted = async () => {
-    await todosApi.deleteTodos();
-    router.refresh();
-  };
+  // const deleteCompleted = async () => {
+  //   await todosApi.deleteTodos();
+  //   router.refresh();
+  // };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (description.trim().length === 0) {
       return;
     }
-    await createTodo();
+    // await createTodo();
+    await addTodoAction(description)
     setDescription('');
-    router.refresh();
+    // router.refresh();
   };
 
   return (
@@ -49,7 +51,7 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button
-        onClick={() => deleteCompleted()}
+        onClick={() => deleteTodosCompletedAction()}
         type='button'
         className='flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all'
       >

@@ -5,7 +5,7 @@ import { Todo } from '@prisma/client';
 import { TodoItem } from './TodoItem';
 
 // import * as todosApi from '@/todos/helpers/todo';
-import { toggleTodo } from '../actions/';
+import { toggleTodoAction } from '../actions/';
 
 interface Props {
   todos?: Todo[];
@@ -25,7 +25,7 @@ export const TodosGrid = ({ todos = [] }: Props) => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
+        <TodoItem key={todo.id} todo={todo} toggleTodo={toggleTodoAction} />
       ))}
     </div>
   );
