@@ -1,8 +1,12 @@
+'use client';
 // https://tailwindcomponents.com/component/e-commerce-product-card
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { IoAddCircleOutline, IoTrashOutline } from 'react-icons/io5';
+
 import { Star } from './Star';
+import { addProductToCart, removeProductToCart } from '@/shopping-cart/actions';
 
 export interface Props {
   id: string;
@@ -13,6 +17,18 @@ export interface Props {
 }
 
 export const ProductCard = ({ id, image, name, price, rating }: Props) => {
+  const route = useRouter();
+
+  const onAddProductToCart = () => {
+    addProductToCart(id);
+    route.refresh();
+  };
+
+  const onRemoveProductFromCart = () => {
+    removeProductToCart(id);
+    route.refresh();
+  };
+
   return (
     <div className='shadow rounded-lg max-w-sm bg-gray-800 border-gray-100'>
       {/* Product Image */}
@@ -49,13 +65,19 @@ export const ProductCard = ({ id, image, name, price, rating }: Props) => {
 
         {/* Price and Add to Cart */}
         <div className='flex items-center justify-between'>
-          <span className='text-3xl font-bold text-white'>${price}</span>
+          <span className='text-2xl font-bold text-white'>${price}</span>
 
           <div className='flex'>
-            <button className='text-white mr-2 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800'>
+            <button
+              className='text-white mr-2 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800'
+              onClick={onAddProductToCart}
+            >
               <IoAddCircleOutline size={25} />
             </button>
-            <button className='text-white  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-800'>
+            <button
+              className='text-white  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-800'
+              onClick={onRemoveProductFromCart}
+            >
               <IoTrashOutline size={20} />
             </button>
           </div>
