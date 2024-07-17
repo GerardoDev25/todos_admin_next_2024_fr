@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {
   IoCalendarClearOutline,
   IoCheckboxOutline,
+  IoCodeWorkingOutline,
   IoListOutline,
 } from 'react-icons/io5';
 import { CiLogout } from 'react-icons/ci';
@@ -23,6 +24,11 @@ const menuItems = [
     title: 'Server Actions',
     path: '/dashboard/server-todos',
     icon: <IoListOutline />,
+  },
+  {
+    title: 'Cookies',
+    path: '/dashboard/cookies',
+    icon: <IoCodeWorkingOutline />,
   },
 ];
 
