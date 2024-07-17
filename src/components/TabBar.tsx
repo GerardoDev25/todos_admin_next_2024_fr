@@ -1,6 +1,6 @@
 'use client';
-
 import { useState } from 'react';
+import { setCookie } from 'cookies-next';
 
 // https://tailwindcomponents.com/component/radio-buttons-1
 
@@ -17,6 +17,7 @@ export const TabBar = ({
 
   const onTabSelected = (tab: number) => {
     setSelected(tab);
+    setCookie('selectedTab', tab.toString());
   };
 
   return (
