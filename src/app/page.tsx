@@ -1,6 +1,12 @@
-import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+import { auth } from '@/auth';
+export default async function Home() {
+  const session = await auth();
+
+  if (session?.user) {
+    redirect('/dashboard');
+  }
   return <>
     <span className='text-5xl'>Hello world</span>
    </>;
