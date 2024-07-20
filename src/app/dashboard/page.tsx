@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { auth } from '@/auth';
+import { auth } from '@/auth/auth';
 import { WidgetItem } from '@/components';
 
 export default async function DashboardPage() {

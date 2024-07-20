@@ -11,7 +11,8 @@ import {
 import { CiLogout } from 'react-icons/ci';
 
 import { SidebarItem } from './SidebarItem';
-import { auth } from '@/auth';
+import { auth } from '@/auth/auth';
+import { LogOutButton } from '@/auth/components';
 
 const menuItems = [
   {
@@ -48,6 +49,8 @@ const menuItems = [
 
 export const Sidebar = async () => {
   const session = await auth();
+
+  // console.log(session);
 
   const userName = session?.user?.name ?? 'No name';
   const avatarUrl =
@@ -92,10 +95,7 @@ export const Sidebar = async () => {
       </div>
 
       <div className='px-6 -mx-6 pt-4 flex justify-between items-center border-t'>
-        <button className='px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group'>
-          <CiLogout />
-          <span className='group-hover:text-gray-700'>Logout</span>
-        </button>
+        <LogOutButton />
       </div>
     </aside>
   );
