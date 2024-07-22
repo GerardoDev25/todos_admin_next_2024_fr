@@ -8,12 +8,12 @@ import {
   IoListOutline,
   IoPersonOutline,
 } from 'react-icons/io5';
-// import { CiLogout } from 'react-icons/ci';
+
+import { CiLogout } from 'react-icons/ci';
+import { getServerSession } from 'next-auth';
 
 import { SidebarItem } from './SidebarItem';
-// import { auth } from '@/auth/auth';
-// import { SessionButton } from '@/auth/components';
-import { CiLogout } from 'react-icons/ci';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 const menuItems = [
   {
@@ -49,14 +49,13 @@ const menuItems = [
 ];
 
 export const Sidebar = async () => {
-  // const session = await auth();
+  const session = await getServerSession(authOptions);
 
-  // const userName = session?.user?.name ?? 'No name';
-  const userName = 'No name';
-  // const avatarUrl =
-  // session?.user?.image ??
-  // 'https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp';
+  const userName = session?.user?.name ?? 'No name';
+  // const userRole = session?.user?. ?? 'No role';
+
   const avatarUrl =
+    session?.user?.image ??
     'https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp';
 
   return (
