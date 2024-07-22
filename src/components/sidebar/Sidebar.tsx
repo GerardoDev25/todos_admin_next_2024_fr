@@ -11,8 +11,9 @@ import {
 // import { CiLogout } from 'react-icons/ci';
 
 import { SidebarItem } from './SidebarItem';
-import { auth } from '@/auth/auth';
-import { SessionButton } from '@/auth/components';
+// import { auth } from '@/auth/auth';
+// import { SessionButton } from '@/auth/components';
+import { CiLogout } from 'react-icons/ci';
 
 const menuItems = [
   {
@@ -48,11 +49,14 @@ const menuItems = [
 ];
 
 export const Sidebar = async () => {
-  const session = await auth();
+  // const session = await auth();
 
-  const userName = session?.user?.name ?? 'No name';
+  // const userName = session?.user?.name ?? 'No name';
+  const userName = 'No name';
+  // const avatarUrl =
+  // session?.user?.image ??
+  // 'https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp';
   const avatarUrl =
-    session?.user?.image ??
     'https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp';
 
   return (
@@ -93,7 +97,11 @@ export const Sidebar = async () => {
       </div>
 
       <div className='px-6 -mx-6 pt-4 flex justify-between items-center border-t'>
-        <SessionButton />
+        {/* <SessionButton /> */}
+        <button className='px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group'>
+          <CiLogout />
+          <span className='group-hover:text-gray-700'>Sign Out</span>
+        </button>
       </div>
     </aside>
   );
