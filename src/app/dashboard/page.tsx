@@ -20,6 +20,9 @@ export default async function DashboardPage() {
             <span>{session?.user?.image}</span>
             <span>{session?.user?.email}</span>
           </div>
+          <div className="">
+            {JSON.stringify(session,null,4)}
+          </div>
         </WidgetItem>
       </div>
     </div>
