@@ -8,11 +8,11 @@ import {
   IoListOutline,
   IoPersonOutline,
 } from 'react-icons/io5';
-import { CiLogout } from 'react-icons/ci';
+// import { CiLogout } from 'react-icons/ci';
 
 import { SidebarItem } from './SidebarItem';
 import { auth } from '@/auth/auth';
-import { LogOutButton } from '@/auth/components';
+import { SessionButton } from '@/auth/components';
 
 const menuItems = [
   {
@@ -49,8 +49,6 @@ const menuItems = [
 
 export const Sidebar = async () => {
   const session = await auth();
-
-  // console.log(session);
 
   const userName = session?.user?.name ?? 'No name';
   const avatarUrl =
@@ -95,7 +93,7 @@ export const Sidebar = async () => {
       </div>
 
       <div className='px-6 -mx-6 pt-4 flex justify-between items-center border-t'>
-        <LogOutButton />
+        <SessionButton />
       </div>
     </aside>
   );

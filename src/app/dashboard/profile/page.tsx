@@ -1,13 +1,17 @@
 'use client';
 
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 0;
+
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+// import { redirect, useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
-
+  // const route = useRouter();
   if (!session?.user && status !== 'loading') {
-    redirect('/api/auth/signin');
+    // redirect('/api/auth/signin');
+    // route.refresh();
   }
 
   return (
