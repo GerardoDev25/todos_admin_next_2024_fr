@@ -31,11 +31,12 @@ export const toggleTodoAction = async (
 };
 
 export async function addTodoAction(
-  description: string
+  description: string,
+  userId: string
 ): Promise<{ ok: boolean; todo: Todo | null }> {
   try {
     const todo = await prisma.todo.create({
-      data: { description },
+      data: { description, userId },
     });
 
     revalidatePath('/dashboard/server-todos');

@@ -9,6 +9,12 @@ steps to follow to run the app in dev mode
 5. run app ```yarn dev```
 6. eject the [seed url](http://localhost:3000/api/seed) to populate the db with test data
 
+## note
+default user:
+  - __email__: john@example.com
+  - __password__: 123456
+
+
 prisma commands
 ```sh
 yarn prisma init

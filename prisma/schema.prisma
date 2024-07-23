@@ -20,20 +20,9 @@ model Todo {
   createAt    DateTime @default(now())
   updateAt    DateTime @updatedAt
 
-  // user   User   @relation(fields: [userId], references: [id])
-  // userId String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
-
-// model Todo {
-//   id          String   @id @default(uuid())
-//   description String
-//   complete    Boolean  @default(false)
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-
-//   user   User   @relation(fields: [userId], references: [id])
-//   userId String
-// }
 
 // Auth.js
 model Account {
@@ -77,7 +66,7 @@ model User {
   accounts Account[]
   sessions Session[]
 
-  // todos Todo[]
+  todos Todo[]
   // Todo Todo[]
 }
 

@@ -3,32 +3,24 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IoTrashOutline } from 'react-icons/io5';
 
-// import * as todosApi from '../helpers/todo';
 import { addTodoAction, deleteTodosCompletedAction } from '../actions';
+import { useSession } from 'next-auth/react';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('');
   const router = useRouter();
 
-  // const createTodo = async () => {
-  //   const todo = await todosApi.createTodo(description);
-  //   console.log(todo);
-  // };
-
-  // const deleteCompleted = async () => {
-  //   await todosApi.deleteTodos();
-  //   router.refresh();
-  // };
+  const session = useSession();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (description.trim().length === 0) {
       return;
     }
-    // await createTodo();
-    await addTodoAction(description)
+    // todo test this
+    await addTodoAction(description, session.data?.user?.id!);
     setDescription('');
-    // router.refresh();
   };
 
   return (

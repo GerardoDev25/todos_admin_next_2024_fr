@@ -1,11 +1,13 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 // ? to always build this page without cache
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-export const dynamic = 'force-dynamic'
-export const revalidate = 0;
 
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import { NewTodo, TodosGrid } from '@/todos';
+import { getServerSessionAction } from '@/auth/actions';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Server todos',
@@ -13,10 +15,15 @@ export const metadata: Metadata = {
 };
 
 export default async function ServerTodosPage() {
+  const user = await getServerSessionAction();
+
+  if (!user) redirect('/api/auth/signin');
+
   const todos = await prisma.todo.findMany({
+    where: { userId: user.id },
     orderBy: { description: 'desc' },
   });
-  // console.log('builded server-todos');
+
   return (
     <>
       <span className='text-3xl mb-10'>Server Actions</span>
