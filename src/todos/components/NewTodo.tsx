@@ -3,15 +3,13 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IoTrashOutline } from 'react-icons/io5';
 
-import { addTodoAction, deleteTodosCompletedAction } from '../actions';
-import { useSession } from 'next-auth/react';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { deleteTodosCompletedAction } from '../actions';
+import { createTodo } from '../helpers/todo';
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('');
   const router = useRouter();
 
-  const session = useSession();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -19,8 +17,10 @@ export const NewTodo = () => {
       return;
     }
     // todo test this
-    await addTodoAction(description, session.data?.user?.id!);
+    // await addTodoAction(description, session.data?.user?.id!);
+    await createTodo(description)
     setDescription('');
+    router.refresh();
   };
 
   return (

@@ -2,13 +2,21 @@ import { NextResponse, NextRequest } from 'next/server';
 import prisma from '../../../../lib/prisma';
 import { boolean, object, string } from 'yup';
 import { Todo } from '@prisma/client';
+import { getServerSessionAction } from '@/auth/actions';
 
 interface Segments {
   params: { id: string };
 }
 
 const getTodo = async (id: string): Promise<Todo | null> => {
-  return await prisma.todo.findFirst({ where: { id } });
+  const user = await getServerSessionAction();
+
+  if (!user) {
+    return null;
+  }
+  const todo = await prisma.todo.findFirst({ where: { id, userId: user.id } });
+
+  return todo;
 };
 
 export async function GET(request: Request, { params }: Segments) {
